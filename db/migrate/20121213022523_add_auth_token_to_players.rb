@@ -7,6 +7,5 @@ class AddAuthTokenToPlayers < ActiveRecord::Migration
     end
 
     change_column :players, :authentication_token, :string, :null => false, :default => ""
-    add_index :players, :authentication_token, :unique => true
   end
 end

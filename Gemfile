@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2'
 gem 'pg'
-gem 'thin'
+gem 'unicorn'
 gem 'dalli'
 
 
@@ -38,9 +38,6 @@ group :development, :test do
   gem 'sqlite3'
 end
 
-group :development do
-  gem 'debugger'
-end
 
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'

@@ -50,18 +50,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
-    columnize (0.3.6)
     commonjs (0.2.6)
-    daemons (1.1.9)
     dalli (2.1.0)
     database_cleaner (0.8.0)
-    debugger (1.2.0)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.1.1)
-      debugger-ruby_core_source (~> 1.1.3)
-    debugger-linecache (1.1.2)
-      debugger-ruby_core_source (>= 1.1.1)
-    debugger-ruby_core_source (1.1.3)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -70,7 +61,6 @@ GEM
     diff-lcs (1.1.3)
     elo (0.1.0)
     erubis (2.7.0)
-    eventmachine (0.12.10)
     excon (0.16.1)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -112,6 +102,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
+    kgio (2.8.0)
     launchy (2.1.2)
       addressable (~> 2.3)
     less (2.2.2)
@@ -164,6 +155,7 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
+    raindrops (0.10.0)
     rake (10.0.3)
     ransack (0.7.0)
       actionpack (~> 3.0)
@@ -223,10 +215,6 @@ GEM
       sinatra (~> 1.0.0)
     therubyracer (0.10.2)
       libv8 (~> 3.3.10)
-    thin (1.4.1)
-      daemons (>= 1.0.9)
-      eventmachine (>= 0.12.6)
-      rack (>= 1.0.0)
     thor (0.17.0)
     tilt (1.3.6)
     treetop (1.4.12)
@@ -241,6 +229,10 @@ GEM
     uglifier (1.2.7)
       execjs (>= 0.3.0)
       multi_json (~> 1.3)
+    unicorn (4.6.2)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
     uniform_notifier (1.0.2)
     warden (1.2.1)
       rack (>= 1.0)
@@ -256,7 +248,6 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   dalli
   database_cleaner
-  debugger
   devise
   elo
   factory_girl_rails (= 1.1.rc1)
@@ -280,6 +271,6 @@ DEPENDENCIES
   sqlite3
   taps
   therubyracer
-  thin
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
+  unicorn

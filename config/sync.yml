@@ -1,5 +1,5 @@
 # Pusher
-production:
+development:
   adapter_javascript_url: "http://js.pusher.com/2.0/pusher.min.js"
   app_id: <%= ENV['PUSHER_APP_ID'] %>
   api_key: <%= ENV['PUSHER_API_KEY'] %>

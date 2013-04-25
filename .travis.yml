@@ -1,11 +1,12 @@
 language: ruby
 bundler_args: --without development
 rvm:
-  - 1.9.2
+  - 2.0
   - 1.9.3
+  - 1.9.2
+  - ruby-head
 before_script:
+  - "cp config/database.yml.example config/database.yml"
+  - "cp config/sync.yml.example config/sync.yml"
   - "psql -c 'create database latter_test;' -U postgres"
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - "ln -s /home/travis/builds/joshmcarthur/Latter/config/database.yml.example /home/travis/builds/joshmcarthur/Latter/config/database.yml"
-script: RAILS_ENV=test bundle exec rake db:migrate:reset spec
+script: RAILS_ENV=test bundle exec rake db:migrate db:test:prepare spec

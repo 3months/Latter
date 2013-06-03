@@ -1,17 +1,17 @@
 json.array! @games do |game|
   json.challenger do
-    if json.challenger.present?
+    if game.challenger
       json.partial!("api/v1/players/player", player: game.challenger)
     else
-      nil
+      json.nil!
     end
  end
 
   json.challenged do
-    if json.challenged.present?
+    if game.challenged
       json.partial!("api/v1/players/player", player: game.challenged)
     else
-      nil
+      json.nil!
     end
   end
 

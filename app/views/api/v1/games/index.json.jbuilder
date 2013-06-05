@@ -5,7 +5,7 @@ json.array! @games do |game|
     else
       json.nil!
     end
- end
+  end
 
   json.challenged do
     if game.challenged

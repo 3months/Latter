@@ -20,23 +20,21 @@ gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'rspec-rails'
+end
+
+group :development do
+  gem 'dotenv-rails'
+  gem 'foreman'
+end
+
+group :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-  gem 'dotenv-rails'
-  gem 'foreman'
-
   # DRb server for testing frameworks
   gem 'spork', '1.0.0rc'
   gem 'simplecov', :require => false
-
-  # command line tool to easily handle events on file system modifications
-  gem 'guard'
-  gem 'guard-bundler'
-  gem 'guard-rspec'
-  gem 'guard-spork'
 end
-
 
 group :production do
   gem 'rails_12factor'

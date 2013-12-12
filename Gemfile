@@ -2,8 +2,9 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 4.0'
 gem 'pg'
-gem 'unicorn'
 gem 'memcachier'
+gem 'passenger'
+
 gem 'dalli'
 gem 'jbuilder'
 gem 'elo'

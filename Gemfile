@@ -5,6 +5,7 @@ gem 'rails', '~> 4.0'
 gem 'pg'
 gem 'memcachier'
 gem 'dalli'
+gem 'passenger'
 
 # Application-specific gems
 
@@ -84,6 +85,5 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'newrelic_rpm'
-  gem 'passenger'
 end
 

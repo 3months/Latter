@@ -1,11 +1,13 @@
 GIT
-  remote: git://github.com/ernie/ransack.git
-  revision: 3299f3aeaf5ce0a264f194daa0bec86919dfad82
+  remote: git://github.com/activerecord-hackery/ransack.git
+  revision: 0a77a1b89cf6e00e0a63f93bfebaa7934a21ce93
   ref: rails-4
   specs:
-    ransack (0.7.3)
-      actionpack (~> 4.0.0)
-      activerecord (~> 4.0.0)
+    ransack (1.1.0)
+      actionpack (>= 4.0)
+      activerecord (>= 4.0)
+      activesupport (>= 4.0)
+      i18n
       polyamorous (~> 0.6.0)
 
 GEM
@@ -109,7 +111,7 @@ GEM
       rack
       rake (>= 0.8.1)
     pg (0.16.0)
-    polyamorous (0.6.3)
+    polyamorous (0.6.4)
       activerecord (>= 3.0)
     polyglot (0.3.3)
     public_activity (1.4.1)
@@ -209,7 +211,7 @@ DEPENDENCIES
   passenger
   pg
   public_activity
-  rails (~> 4.0)
+  rails (~> 4.0.0)
   rails_12factor
   ransack!
   rspec-rails

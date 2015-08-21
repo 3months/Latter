@@ -3,7 +3,9 @@ source 'https://rubygems.org'
 # Main dependency gems
 gem 'rails', '~> 4.0.11'
 gem 'pg'
+gem 'memcachier'
 gem 'dalli'
+gem 'passenger'
 
 # Application-specific gems
 
@@ -82,6 +84,6 @@ end
 # This gem group ensures Heroku compatibility
 group :production do
   gem 'rails_12factor'
-  gem 'passenger'
+  gem 'newrelic_rpm'
 end
 

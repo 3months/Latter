@@ -24,6 +24,7 @@ gem 'gravtastic'
 
 # Perform authentication with Devise
 gem 'devise'
+gem 'devise-token_authenticatable' # keep backwards compability
 
 # Use Kaminari for pagination (only for games listing)
 gem 'kaminari'

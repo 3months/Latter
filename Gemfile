@@ -65,6 +65,8 @@ group :development do
 
   # Run application via Procfile
   gem 'foreman'
+  # Debugger
+  gem 'byebug'
 end
 
 group :test do

@@ -31,9 +31,9 @@ class ApplicationController < ActionController::Base
     if current_player and !current_player.changed_password?
       old_current_player = current_player
       sign_out :player
-      old_current_player.send(:generate_reset_password_token!)
-
-      redirect_to edit_player_password_path(:reset_password_token => old_current_player.reset_password_token)
+      old_current_player.send(:send_reset_password_instructions)
+      flash[:notice] = "You should change your password! Check your email for instructions."
+      redirect_to root_path
       return false
     else
       return true

@@ -8,15 +8,16 @@
       <%= render :partial => 'layouts/common/flashes' %>
 
       <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+        <%= render :partial => 'shared/form_errors', :locals => {:form => f} %>
 
-        <%= f.password_field :password, 
-        :class => 'span12', 
-        :placeholder => I18n.t('activerecord.attributes.player.new_password') 
+        <%= f.password_field :password,
+        :class => 'span12',
+        :placeholder => I18n.t('activerecord.attributes.player.new_password')
         %>
 
-        <%= f.password_field :password_confirmation, 
+        <%= f.password_field :password_confirmation,
         :class => 'span12',
-        :placeholder => I18n.t('activerecord.attributes.player.new_password_confirmation') 
+        :placeholder => I18n.t('activerecord.attributes.player.new_password_confirmation')
         %>
 
 

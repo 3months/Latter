@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe GameNotifier do
+describe GameNotifier, type: :mailer do
 
   let(:game) { FactoryGirl.create(:game) }
 

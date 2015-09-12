@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Alert do
+describe Alert, type: :model do
 
   subject do
     FactoryGirl.build(:alert)
@@ -38,7 +38,7 @@ describe Alert do
 
       sleep 1
 
-      Alert.current.include?(subject).should be_false
+      Alert.current.include?(subject).should be false
     end
   end
 end

@@ -8,15 +8,16 @@
       <%= render :partial => 'layouts/common/flashes' %>
 
       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+        <%= render :partial => 'shared/form_errors', :locals => {:form => f} %>
 
-        <%= f.email_field :email, 
-        :class => 'span12', 
-        :placeholder => I18n.t('activerecord.attributes.player.email') 
+        <%= f.email_field :email,
+        :class => 'span12',
+        :placeholder => I18n.t('activerecord.attributes.player.email')
         %>
 
-        <%= f.password_field :password, 
+        <%= f.password_field :password,
         :class => 'span12',
-        :placeholder => I18n.t('activerecord.attributes.player.password') 
+        :placeholder => I18n.t('activerecord.attributes.player.password')
         %>
 
         <% if devise_mapping.rememberable? -%>

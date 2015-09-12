@@ -11,20 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122220931) do
+ActiveRecord::Schema.define(version: 20150912041707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
-    t.string   "trackable_type"
+    t.string   "trackable_type", limit: nil
     t.integer  "owner_id"
-    t.string   "owner_type"
-    t.string   "key"
+    t.string   "owner_type",     limit: nil
+    t.string   "key",            limit: nil
     t.text     "parameters"
     t.integer  "recipient_id"
-    t.string   "recipient_type"
+    t.string   "recipient_type", limit: nil
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -34,11 +34,11 @@ ActiveRecord::Schema.define(version: 20140122220931) do
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "alerts", force: true do |t|
-    t.string   "title"
-    t.text     "message",                      null: false
+    t.string   "title",       limit: nil
+    t.text     "message",                                  null: false
     t.datetime "expire_at"
-    t.datetime "activate_at",                  null: false
-    t.string   "category",    default: "info", null: false
+    t.datetime "activate_at",                              null: false
+    t.string   "category",    limit: nil, default: "info", null: false
   end
 
   create_table "awards", force: true do |t|
@@ -51,23 +51,23 @@ ActiveRecord::Schema.define(version: 20140122220931) do
   end
 
   create_table "badges", force: true do |t|
-    t.string   "name"
+    t.string   "name",             limit: nil
     t.text     "description"
-    t.string   "image_url"
+    t.string   "image_url",        limit: nil
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "award_rule"
-    t.integer  "award_rule_count", default: 0
-    t.boolean  "allow_duplicates", default: false
-    t.integer  "expire_in_days",   default: 0
+    t.integer  "award_rule_count",             default: 0
+    t.boolean  "allow_duplicates",             default: false
+    t.integer  "expire_in_days",               default: 0
   end
 
   create_table "games", force: true do |t|
-    t.integer  "challenger_id",                            null: false
-    t.integer  "challenged_id",                            null: false
-    t.boolean  "complete",                 default: false, null: false
+    t.integer  "challenger_id",                                        null: false
+    t.integer  "challenged_id",                                        null: false
+    t.boolean  "complete",                             default: false, null: false
     t.float    "result"
-    t.string   "score"
+    t.string   "score",                    limit: nil
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "winner_id"
@@ -81,29 +81,28 @@ ActiveRecord::Schema.define(version: 20140122220931) do
   add_index "games", ["complete"], name: "index_games_on_complete", using: :btree
 
   create_table "players", force: true do |t|
-    t.string   "email",                                   default: "",    null: false
-    t.string   "encrypted_password",                      default: "",    null: false
-    t.string   "reset_password_token"
+    t.string   "email",                                   limit: nil, default: "",    null: false
+    t.string   "encrypted_password",                      limit: nil, default: "",    null: false
+    t.string   "reset_password_token",                    limit: nil
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                           default: 0
+    t.integer  "sign_in_count",                                       default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "name",                                                    null: false
-    t.integer  "rating",                                  default: 1000,  null: false
-    t.boolean  "pro",                                     default: false, null: false
-    t.boolean  "starter",                                 default: true,  null: false
+    t.string   "current_sign_in_ip",                      limit: nil
+    t.string   "last_sign_in_ip",                         limit: nil
+    t.string   "name",                                    limit: nil,                 null: false
+    t.integer  "rating",                                              default: 1000,  null: false
+    t.boolean  "pro",                                                 default: false, null: false
+    t.boolean  "starter",                                             default: true,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "confirmation_token"
+    t.string   "confirmation_token",                      limit: nil
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.boolean  "changed_password",                        default: false, null: false
-    t.boolean  "wants_challenge_completed_notifications", default: true,  null: false
-    t.boolean  "active",                                  default: true,  null: false
-    t.string   "authentication_token",                    default: "",    null: false
+    t.boolean  "wants_challenge_completed_notifications",             default: true,  null: false
+    t.boolean  "active",                                              default: true,  null: false
+    t.string   "authentication_token",                    limit: nil, default: "",    null: false
   end
 
   add_index "players", ["active"], name: "index_players_on_active", using: :btree

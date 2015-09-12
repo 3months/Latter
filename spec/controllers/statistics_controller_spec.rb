@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StatisticsController do
+describe StatisticsController, type: :controller do
 
   login_player
 

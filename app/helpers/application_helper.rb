@@ -36,4 +36,19 @@ module ApplicationHelper
       end
     end
   end
+
+  #Customize devise error_messages
+  def form_error_messages!
+    return "" if resource.errors.empty?
+
+    messages = resource.errors.full_messages.map { |msg| content_tag(:p, msg) }.join
+
+    html = <<-HTML
+    <div id="error_explanation alert alert-warning">
+      #{messages}
+    </div>
+    HTML
+
+    html.html_safe
+  end
 end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BadgesController do
+describe BadgesController, type: :controller do
   login_player
 
   let(:badge) { FactoryGirl.build_stubbed(:badge) }

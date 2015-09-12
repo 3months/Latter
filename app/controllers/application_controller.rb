@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_filter :needs_password?, :if => :current_player
   before_filter :set_locale
   protect_from_forgery
 
@@ -19,24 +18,4 @@ class ApplicationController < ActionController::Base
     I18n.locale = params[:locale] || I18n.default_locale
   end
 
-  # Private - Detect whether the user needs to change their password
-  #
-  # When players are first created, they are assigned a default password
-  # which they must change on first log in.
-  # This method checks whether the player has changed their password:
-  # - If they have, it carries on
-  # - If they have not, it logs them out and redirects them to the change
-  #   password page.
-  def needs_password?
-    if current_player and !current_player.changed_password?
-      old_current_player = current_player
-      sign_out :player
-      old_current_player.send(:send_reset_password_instructions)
-      flash[:notice] = "You should change your password! Check your email for instructions."
-      redirect_to root_path
-      return false
-    else
-      return true
-    end
-  end
 end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Game do
+describe Game, type: :model do
   subject(:game) do
     FactoryGirl.build(:game)
   end
@@ -109,7 +109,7 @@ describe Game do
     end
 
     it "should mark the game as complete" do
-      expect { subject }.to change(game, :complete?).to be_true
+      expect { subject }.to change(game, :complete?).to be true
     end
 
     it "should save the correct game result" do
@@ -118,12 +118,12 @@ describe Game do
 
     it "should correctly identify the winner" do
       subject
-      game.winner?(game.challenger).should be_true
+      game.winner?(game.challenger).should be true
     end
 
     it "should correctly identify the loser" do
       subject
-      game.loser?(game.challenged).should be_true
+      game.loser?(game.challenged).should be true
     end
 
     it "should return the correct score for each player" do

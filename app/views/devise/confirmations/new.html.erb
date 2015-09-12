@@ -7,11 +7,12 @@
       <legend><%= I18n.t('devise.confirmations.heading') %></legend>
       <%= render :partial => 'layouts/common/flashes' %>
 
-	  <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+	  <%= form_for(@confirmable, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+        <%= render :partial => 'shared/form_errors', :locals => {:form => f} %>
 
-        <%= f.email_field :email, 
-        :class => 'span12', 
-        :placeholder => I18n.t('activerecord.attributes.player.email') 
+        <%= f.email_field :email,
+        :class => 'span12',
+        :placeholder => I18n.t('activerecord.attributes.player.email')
         %>
 
         <%= f.submit I18n.t('devise.confirmations.submit_button'), :class => 'span12 btn btn-primary btn-block' %>

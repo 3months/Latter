@@ -21,9 +21,8 @@ class Player < ActiveRecord::Base
          :recoverable,
          :trackable,
          :validatable
-        
 
-  before_validation :set_default_password, :on => :create
+
   before_save :ensure_authentication_token
 
   validates_presence_of :name, :allow_blank => false
@@ -60,22 +59,6 @@ class Player < ActiveRecord::Base
   def ranking
     Player.order('rating DESC').select(:id).map(&:id).index(self.id) + 1
   end
-
-  # Public - A hook called by devise after a password reset
-  #
-  # We use this method to update our own password_changed? boolean
-  # if the record is not new (i.e. someone hasn't just registered or something),
-  # and the encrypted_password field has changed. We then delegate the action
-  # up to super.
-  #
-  def after_password_reset
-    if !self.new_record? and self.encrypted_password_changed?
-      self.changed_password = true
-    end
-
-    super
-  end
-
 
   # Public - Calculate whether this player is a rookie
   #
@@ -197,24 +180,31 @@ class Player < ActiveRecord::Base
     super(options)
   end
 
+  # new function to set the password without knowing the current password used in our confirmation controller.
+  def attempt_set_password(params)
+    update_attributes(password: params[:password], password_confirmation: params[:password_confirmation])
+  end
 
-  private
+  # new function to return whether a password has been set
+  def has_no_password?
+    self.encrypted_password.blank?
+  end
 
-  # Private - Set a default password for the user
-  #
-  # Because only existing players can add new players, we want to
-  # avoid the situation where a player adds a new player, and then has to
-  # think up a password, enter it, and then say "your password is x".
-  #
-  # Instead, we set a default secure password to the account, and then
-  # get them to set their password the first time they log in
-  # (see ApplicationController)
-  def set_default_password
-    Devise.friendly_token[0..20].tap do |pass|
-      self.password = pass
-      self.password_confirmation = pass
+  # new function to provide access to protected method pending_any_confirmation
+  def only_if_unconfirmed
+    pending_any_confirmation {yield}
+  end
+
+  def password_required?
+    # Password is required if it is being set, but not for new records
+    if !persisted?
+      false
+    else
+      !password.nil? || !password_confirmation.nil?
     end
   end
+
+  private
 
   # Private - Update player ratings based on the result
   # of a game

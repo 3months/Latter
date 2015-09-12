@@ -1,0 +1,29 @@
+<% content_for :flashes do %>
+  &nbsp;
+<% end %>
+
+<div class="row">
+    <div class="span4 offset4 well">
+      <legend><%= I18n.t('devise.confirmations.activate_heading') %></legend>
+      <%= render :partial => 'layouts/common/flashes' %>
+
+    <%= form_for(resource, :as => resource_name, :url => update_player_confirmation_path(resource_name), :html => { :method => :patch }) do |f| %>
+        <%= render :partial => 'shared/form_errors', :locals => {:form => f} %>
+
+         <% if @requires_password %>
+            <%= f.password_field :password,
+            :class => 'span12',
+            :placeholder => I18n.t('activerecord.attributes.player.new_password')
+            %>
+
+            <%= f.password_field :password_confirmation,
+            :class => 'span12',
+            :placeholder => I18n.t('activerecord.attributes.player.new_password_confirmation')
+            %>
+        <% end %>
+        <%= hidden_field_tag :confirmation_token,@confirmation_token %>
+
+        <%= f.submit I18n.t('devise.confirmations.activate_buttom'), :class => 'span12 btn btn-primary btn-block' %>
+      <% end %>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Player do
+describe Player, type: :model do
 
   subject do
     FactoryGirl.build(:player)
@@ -15,12 +15,6 @@ describe Player do
     subject.name = ""
     subject.save
     subject.should_not be_persisted
-  end
-
-  it "should set a default password when the player is created" do
-    subject.password.should be_blank
-    subject.save
-    subject.password.should_not be_blank
   end
 
   it "should set an authentication token when the player is saved" do
@@ -103,12 +97,12 @@ describe Player do
     it "should be pro if rating is over the threshold" do
       # Default player rating threshold is 2400
       subject.rating = 2500
-      subject.pro_rating?.should be_true
+      subject.pro_rating?.should be true
     end
 
     it "should not be pro if rating is not over the threshold" do
       subject.rating = 2000
-      subject.pro_rating?.should_not be_true
+      subject.pro_rating?.should_not be true
     end
   end
 
@@ -116,13 +110,13 @@ describe Player do
     it "should be a starter if the player has played less than 30 games" do
       games = FactoryGirl.build_list(:game, 29, :challenger => subject)
       subject.stub(:games).and_return(games)
-      subject.starter?.should be_true
+      subject.starter?.should be true
     end
 
     it "should not be a starter if the player has played more than 30 games" do
       games = FactoryGirl.build_list(:game, 31, :challenger => subject)
       subject.stub(:games).and_return(games)
-      subject.starter?.should_not be_true
+      subject.starter?.should_not be true
     end
   end
 

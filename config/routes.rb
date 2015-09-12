@@ -1,5 +1,8 @@
 Latter::Application.routes.draw do
-  devise_for :players
+  as :player do
+      patch '/player/confirmation' => 'players/confirmations#update', :via => :patch, :as => :update_player_confirmation
+  end
+  devise_for :players, controllers: { confirmations: "players/confirmations" }
 
   resources :games, :except => [:edit, :update] do
     post :complete, :on => :member

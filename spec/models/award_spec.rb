@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Award do
+describe Award, type: :model do
 
     let(:player) { FactoryGirl.create(:player) }
     let(:badge) { FactoryGirl.create(:badge) }

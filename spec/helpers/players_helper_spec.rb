@@ -10,7 +10,7 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe PlayersHelper do
+describe PlayersHelper, type: :helper do
   before :each do
     @player = FactoryGirl.build(:player)
   end

@@ -16,5 +16,4 @@ FactoryGirl.create_list(
   password: 'password',
   password_confirmation: 'password',
   confirmed_at: Time.now,
-  changed_password: true
 )

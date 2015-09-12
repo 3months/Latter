@@ -1,69 +1,38 @@
 require 'spec_helper'
 
-describe "Authentication" do
-  
-  let(:player) { FactoryGirl.create(:player, :confirmed_at => nil, :changed_password => false) }
-  let(:logged_in_player) do
-    player.confirmed_at = Time.now
-    player.changed_password = true
-    player.save!
+describe 'Authentication', type: :feature do
+  let(:new_player) { FactoryGirl.create(:player_new) }
+  let(:player) { FactoryGirl.create(:player) }
 
-    player
-  end
-
-  it "should log in a player" do
+  it 'should log in a player' do
 
     visit new_player_session_path
-    fill_in 'player_email', :with => logged_in_player.email
-    fill_in 'player_password', :with => logged_in_player.password
+    fill_in 'player_email', with: player.email
+    fill_in 'player_password', with: player.password
     click_on 'Sign in'
 
     page.should have_content 'Log out'
   end
 
-  it "should require a player confirm their account before logging in" do
-    visit new_player_session_path
-    fill_in 'player_email', :with => player.email
-    fill_in 'player_password', :with => player.password
-    click_on 'Sign in'
+  it 'should require a player change their password to confirm their account' do
+    # exposing protected parameter from Devise
+    new_player.define_singleton_method(:raw_confirmation_token) do
+      @raw_confirmation_token
+    end
 
-    current_path.should eq new_player_session_path
-    page.should have_content I18n.t('devise.failure.unconfirmed')
+    visit player_confirmation_path(confirmation_token: new_player.raw_confirmation_token)
+    fill_in 'player_password', with: 'password'
+    fill_in 'player_password_confirmation', with: 'password'
+    click_on I18n.t('devise.confirmations.activate_buttom')
+
+    new_player.reload
+    expect(new_player.confirmed_at).to_not be_blank
   end
 
-  it "should require a player change their password when first logging in" do
-    player.confirmed_at = Time.now
-    player.save
-
+  it 'should log out a player' do
     visit new_player_session_path
-    fill_in 'player_email', :with => player.email
-    fill_in 'player_password', :with => player.password
-    click_on 'Sign in'
-
-    current_path.should eq edit_player_password_path
-  end
-
-  it "should log the player in after changing password for the first time" do
-    player.confirmed_at = Time.now
-    player.save
-
-    visit new_player_session_path
-    fill_in 'player_email', :with => player.email
-    fill_in 'player_password', :with => player.password
-    click_on 'Sign in'
-
-    fill_in 'player_password', :with => 'test123'
-    fill_in 'player_password_confirmation', :with => 'test123'
-    click_on 'Change Password'
-
-    current_path.should eq root_path
-    page.should have_content 'Log out'
-  end
-
-  it "should log out a player" do
-    visit new_player_session_path
-    fill_in 'player_email', :with => logged_in_player.email
-    fill_in 'player_password', :with => logged_in_player.password
+    fill_in 'player_email', with: player.email
+    fill_in 'player_password', with: player.password
     click_on 'Sign in'
 
     page.should have_content 'Log out'

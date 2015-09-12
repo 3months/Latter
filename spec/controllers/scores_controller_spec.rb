@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ScoresController do
+describe ScoresController, type: :controller do
 
   let(:player) { FactoryGirl.create(:player) }
   let(:game) { FactoryGirl.create(:game, :challenger => player) }

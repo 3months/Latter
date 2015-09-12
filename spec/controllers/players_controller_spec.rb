@@ -18,7 +18,7 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe PlayersController do
+describe PlayersController, type: :controller do
   login_player
 
   let(:player) { FactoryGirl.create(:player) }
@@ -27,7 +27,7 @@ describe PlayersController do
   # Player. As you add validations to Player, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    attributes = FactoryGirl.attributes_for(:player).except(:confirmed_at, :changed_password)
+    attributes = FactoryGirl.attributes_for(:player).except(:confirmed_at)
   end
 
   # This should return the minimal set of values that should be in the session

@@ -13,8 +13,8 @@ en:
 
   devise:
     links:
-      forgot_password: Forgotten your password? 
-      resend_confirmation: Didn't receive confirmation instructions? 
+      forgot_password: Forgotten your password?
+      resend_confirmation: Didn't receive confirmation instructions?
     failure:
       already_authenticated: 'You are already signed in.'
       unauthenticated: 'You need to sign in or sign up before continuing.'
@@ -41,7 +41,8 @@ en:
     confirmations:
       heading: 'Resend confirmation instructions'
       submit_button: 'Resend confirmation instructions'
-
+      activate_buttom: 'Activate Account'
+      activate_heading: 'Set your password to activate your account'
       send_instructions: 'You will receive an email with instructions about how to confirm your account in a few minutes.'
       send_paranoid_instructions: 'If your email address exists in our database, you will receive an email with instructions about how to confirm your account in a few minutes.'
       confirmed: 'Your account was successfully confirmed. You are now signed in.'
